@@ -8,34 +8,28 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ExtinguisherWorking : MonoBehaviour
 {
 
-    [SerializeField] ParticleSystem smokeParticle; 
+    [SerializeField] ParticleSystem smokeParticle;
 
     private void Start()
     {
-        XRGrabInteractable grabbale = this.GetComponent<XRGrabInteractable>();
+        XRGrabInteractable grabbable = this.GetComponent<XRGrabInteractable>();
         
-        grabbale.activated.AddListener(StartParticles);
-        
-        grabbale.deactivated.AddListener(StopParticles);
-        grabbale.selectExited.AddListener(StopParticles);
+        grabbable.activated.AddListener(StartParticles);
+        grabbable.deactivated.AddListener(StopParticles);
 
+        grabbable.selectExited.AddListener(StopParticles);
     }
 
-    public void StartParticles(BaseInteractionEventArgs arg)
+    void StartParticles(BaseInteractionEventArgs arg)
     {
         if (arg.interactorObject is XRDirectInteractor)
         {
-            Debug.Log("EXTRACTED");
             smokeParticle.Play();
         }
-        Debug.Log("SMOKE STARTED");
-
     }
 
-    public void StopParticles(BaseInteractionEventArgs arg)
+    void StopParticles(BaseInteractionEventArgs arg)
     {
-        Debug.Log("REMOVED");
-
         smokeParticle.Stop();
     }
 }
