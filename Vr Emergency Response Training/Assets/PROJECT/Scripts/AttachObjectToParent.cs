@@ -29,7 +29,6 @@ public class AttachObjectToParent : MonoBehaviour
             gameObject.transform.localPosition = InitialPosition;
             gameObject.transform.localScale = new Vector3(100, 100, 100);
         }
-        gameObject.transform.localScale = new Vector3(100, 100, 100);
     }
 
     void ReattachToParent(BaseInteractionEventArgs arg)
@@ -37,8 +36,6 @@ public class AttachObjectToParent : MonoBehaviour
         gameObject.transform.SetParent(parentObj);
         gameObject.transform.localPosition = InitialPosition;
         gameObject.transform.localScale = scale;
-
-        Debug.Log("Attached to Parent");
     }
 }
 
