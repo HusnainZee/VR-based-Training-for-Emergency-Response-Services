@@ -37,5 +37,10 @@ public class AttachObjectToParent : MonoBehaviour
         gameObject.transform.localPosition = InitialPosition;
         gameObject.transform.localScale = scale;
     }
+
+    void GrabbedOff(BaseInteractionEventArgs arg)
+    {
+        isGrabbed = false;
+    }
 }
 
