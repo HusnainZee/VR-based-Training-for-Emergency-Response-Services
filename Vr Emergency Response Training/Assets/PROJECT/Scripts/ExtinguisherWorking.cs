@@ -20,12 +20,9 @@ public class ExtinguisherWorking : MonoBehaviour
         grabbable.selectExited.AddListener(StopParticles);
     }
 
-    void StartParticles(BaseInteractionEventArgs arg)
+    public void StartParticles(BaseInteractionEventArgs arg)
     {
-        if (arg.interactorObject is XRDirectInteractor)
-        {
-            smokeParticle.Play();
-        }
+        smokeParticle.Play();
     }
 
     void StopParticles(BaseInteractionEventArgs arg)
