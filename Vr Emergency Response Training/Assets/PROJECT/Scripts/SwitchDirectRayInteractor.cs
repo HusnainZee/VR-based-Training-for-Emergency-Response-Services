@@ -13,6 +13,11 @@ public class SwitchDirectRayInteractor : MonoBehaviour
     [SerializeField] XRDirectInteractor m_RightDirectInteractor;
     [SerializeField] XRRayInteractor m_RightRayInteractor;
 
+    private void Start()
+    {
+        m_RightRayInteractor.gameObject.SetActive(false);
+        m_LeftRayInteractor.gameObject.SetActive(false);
+    }
     private void Update()
     {
         if (Input.GetButton("RightControllerB"))
