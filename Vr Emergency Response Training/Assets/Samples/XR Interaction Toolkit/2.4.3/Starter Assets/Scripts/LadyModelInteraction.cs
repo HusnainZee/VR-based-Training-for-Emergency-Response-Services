@@ -9,26 +9,16 @@ public class LadyModelInteraction : MonoBehaviour
 {
 
     [SerializeField] GameObject canvasPanel;
+    [SerializeField] GameObject ladyModel;
 
-    private void Start()
-    {
-        XRSimpleInteractable interactable  = this.GetComponent<XRSimpleInteractable>();
 
-        interactable.hoverEntered.AddListener(ShowPanel);
-        interactable.hoverExited.AddListener(HidePanel);
-
-        //interactable.deactivated.AddListener(StopParticles);
-
-        //interactable.selectExited.AddListener(StopParticles);
-    }
-
-    void ShowPanel(BaseInteractionEventArgs arg)
-    {
-        canvasPanel.SetActive(true);
-    }
-
-    void HidePanel(BaseInteractionEventArgs arg)
+    public void LeaveHer()
     {
         canvasPanel.SetActive(false);
+    }
+
+    public void Evacuate()
+    {
+        ladyModel.SetActive(false);
     }
 }
