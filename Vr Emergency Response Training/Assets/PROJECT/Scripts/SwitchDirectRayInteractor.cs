@@ -15,7 +15,7 @@ public class SwitchDirectRayInteractor : MonoBehaviour
 
     private void Start()
     {
-        m_RightRayInteractor.gameObject.SetActive(false);
+        m_RightRayInteractor.gameObject.SetActive(true);
         m_LeftRayInteractor.gameObject.SetActive(false);
     }
     private void Update()
