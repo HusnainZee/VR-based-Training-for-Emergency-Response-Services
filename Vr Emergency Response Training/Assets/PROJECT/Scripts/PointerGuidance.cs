@@ -11,6 +11,10 @@ public class PointerGuidance : MonoBehaviour
     [SerializeField] GameObject PassPointer;
     [SerializeField] GameObject PASSinstructionPanel;
 
+    [SerializeField] GameObject ChooseExtinguisherPointer;
+    [SerializeField] GameObject ChooseExtInstructionPanel;
+
+
     private void Start()
     {
         alarmPointer.SetActive(false);
@@ -18,6 +22,10 @@ public class PointerGuidance : MonoBehaviour
 
         PassPointer.SetActive(false);
         PASSinstructionPanel.SetActive(false);
+
+        ChooseExtinguisherPointer.SetActive(false);
+        ChooseExtInstructionPanel.SetActive(false);
+
     }
 
 

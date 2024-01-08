@@ -4,27 +4,46 @@ using UnityEngine;
 
 public class TurnOffObjectOnCollision : MonoBehaviour
 {
+
+    [SerializeField] AudioSource RingTheAlarm;
+
     [SerializeField] AudioSource UnderstandPassAudio;
     [SerializeField] AudioSource PassMethodAudio;
 
+
+    [SerializeField] AudioSource AtyourRightSeeObjAudio;
+    [SerializeField] AudioSource MoveCloserAndPickExtAudio;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("AlarmPointer"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.SetActive(false);
+            if (this.gameObject.CompareTag("AlarmPointer"))
+            {
+                this.gameObject.SetActive(false);
+                RingTheAlarm.Play();
+            }
+            else if (this.gameObject.CompareTag("PASSpointer"))
+            {
+                this.gameObject.SetActive(false);
+
+                UnderstandPassAudio.Stop();
+                PassMethodAudio.Play();
+
+            }
+            else if (this.gameObject.CompareTag("RecogExtinPointer"))
+            {
+                this.gameObject.SetActive(false);
+                AtyourRightSeeObjAudio.Play();
+            }
+            else if (this.gameObject.CompareTag("PickExtPointer"))
+            {
+                this.gameObject.SetActive(false);
+                MoveCloserAndPickExtAudio.Play();
+            }
         }
-        else if (other.gameObject.CompareTag("PASSpointer"))
-        {
-            UnderstandPassAudio.Stop();
-            PassMethodAudio.Play();
-            StartCoroutine(TurnOffPassPointer(other.gameObject));
-        }
+        
     }
 
-    IEnumerator TurnOffPassPointer(GameObject other)
-    {
-        yield return new WaitForSeconds(5);
-        other.SetActive(false);
-    }
 
 }

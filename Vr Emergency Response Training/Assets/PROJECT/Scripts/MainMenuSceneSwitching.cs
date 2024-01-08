@@ -9,7 +9,7 @@ public class MainMenuSceneSwitching : MonoBehaviour
     
     public void OpenFireExtinguisherTraining()
     {
-        SceneManager.LoadScene("Fire Extinguisher");
+        SceneManager.LoadSceneAsync("Fire Extinguisher", LoadSceneMode.Single);
     }
 
 }
