@@ -14,6 +14,8 @@ public class TurnOffObjectOnCollision : MonoBehaviour
     [SerializeField] AudioSource AtyourRightSeeObjAudio;
     [SerializeField] AudioSource MoveCloserAndPickExtAudio;
 
+    [SerializeField] AudioSource RemovePinAudio;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -40,6 +42,11 @@ public class TurnOffObjectOnCollision : MonoBehaviour
             {
                 this.gameObject.SetActive(false);
                 MoveCloserAndPickExtAudio.Play();
+            }
+            else if (this.gameObject.CompareTag("FireLocationPointer"))
+            {
+                this.gameObject.SetActive(false);
+                RemovePinAudio.Play();
             }
         }
         

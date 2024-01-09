@@ -10,6 +10,8 @@ TagManager:
   - PASSpointer
   - RecogExtinPointer
   - PickExtPointer
+  - FireLocationPointer
+  - ExtParticles
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - UI
   - Player
   - Interactable
-  - 
-  - 
+  - ExtMaterial
+  - FireParticle
   - 
   - 
   - 

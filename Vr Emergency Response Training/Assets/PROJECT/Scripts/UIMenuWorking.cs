@@ -55,4 +55,23 @@ public class UIMenuWorking : MonoBehaviour
         pointerGuidance.AlarmPointer();
     }
 
+    public void SceneReloadAndUpdateObj()
+    {
+        int ObjOnFire = PlayerPrefs.GetInt("ObjectOnFire");
+        ObjOnFire++;
+
+        if (ObjOnFire >= 3)
+        {
+            ObjOnFire = 0;
+        }
+
+        PlayerPrefs.SetInt("ObjectOnFire", ObjOnFire);
+        SceneManager.LoadScene("Fire Extinguisher");
+    }
+
+    public void SceneLoadUnguided()
+    {
+        SceneManager.LoadScene("Fire Extinguisher Unguided");
+    }
+
 }
