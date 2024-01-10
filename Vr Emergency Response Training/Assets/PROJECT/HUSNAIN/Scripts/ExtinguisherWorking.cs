@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +18,18 @@ public class ExtinguisherWorking : MonoBehaviour
     bool isInstantiated = false;
     bool isFirst = true;
 
+    public Haptic hapticOnActivated;
+    XRGrabInteractable grabbable;
+
+
+
     private void Start()
     {
-        XRGrabInteractable grabbable = this.GetComponent<XRGrabInteractable>();
+        grabbable = this.GetComponent<XRGrabInteractable>();
         
         grabbable.activated.AddListener(Grabbed);
+        grabbable.activated.AddListener(hapticOnActivated.TriggerHaptic);
+
         grabbable.deactivated.AddListener(NotGrabbed);
 
         grabbable.selectExited.AddListener(NotGrabbed);
@@ -31,6 +39,8 @@ public class ExtinguisherWorking : MonoBehaviour
     {
         if (isGrabbed)
         {
+            hapticOnActivated.SwitchVibrationForever(true);
+
             if (isInstantiated)
             {
                 GameObject smoke = Instantiate(smokeParticlePrefab, instantiatePos);
@@ -48,7 +58,7 @@ public class ExtinguisherWorking : MonoBehaviour
     {
         isGrabbed = true;
         isInstantiated = true;
-        
+
         if (isFirst)
         {
             SweepAudio.Play();
@@ -57,6 +67,7 @@ public class ExtinguisherWorking : MonoBehaviour
 
         AimAudio.Stop();
     }
+
 
     IEnumerator turnOnIstantiatedBool()
     {
@@ -67,6 +78,8 @@ public class ExtinguisherWorking : MonoBehaviour
     public void NotGrabbed(BaseInteractionEventArgs arg)
     {
         isGrabbed = false;
+        hapticOnActivated.SwitchVibrationForever(false);
+
     }
 
     IEnumerator DestroySmokeParticle(GameObject smoke)
@@ -75,7 +88,4 @@ public class ExtinguisherWorking : MonoBehaviour
         GameObject.Destroy(smoke);
     }
 
-    void StopParticles(BaseInteractionEventArgs arg)
-    {
-    }
 }

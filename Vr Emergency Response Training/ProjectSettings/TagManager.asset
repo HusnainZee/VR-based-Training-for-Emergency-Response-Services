@@ -12,6 +12,8 @@ TagManager:
   - PickExtPointer
   - FireLocationPointer
   - ExtParticles
+  - LeftController
+  - RightController
   layers:
   - Default
   - TransparentFX

@@ -74,4 +74,8 @@ public class UIMenuWorking : MonoBehaviour
         SceneManager.LoadScene("Fire Extinguisher Unguided");
     }
 
+    public void SceneLoadMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 }
