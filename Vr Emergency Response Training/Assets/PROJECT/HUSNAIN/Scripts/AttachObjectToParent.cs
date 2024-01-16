@@ -50,6 +50,10 @@ public class AttachObjectToParent : MonoBehaviour
     //}
 
 
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Spline sp;
     [SerializeField] GameObject RightController;
     [SerializeField] GameObject AttachPoint;
@@ -94,7 +98,7 @@ public class AttachObjectToParent : MonoBehaviour
         {
             if (RightController)
             {
-                sp.nodes[2].Position = new Vector3(RightController.transform.localPosition.x * multiplier[0] + AdditionVector.x, RightController.transform.localPosition.y * multiplier[1]+ AdditionVector.y, RightController.transform.localPosition.z * multiplier[2] + AdditionVector.z);
+                sp.nodes[2].Position = new Vector3(RightController.transform.localPosition.x * multiplier[0] + AdditionVector.x, RightController.transform.localPosition.y * multiplier[1] + AdditionVector.y, RightController.transform.localPosition.z * multiplier[2] + AdditionVector.z);
                 Debug.Log("sp: " + sp.nodes[2].Position);
                 Debug.Log("hand: " + RightController.transform.localPosition);
 
