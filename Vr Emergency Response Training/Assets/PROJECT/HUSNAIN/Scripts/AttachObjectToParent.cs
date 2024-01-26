@@ -18,104 +18,104 @@ public class AttachObjectToParent : MonoBehaviour
     [SerializeField] Vector3 AdditionVector;
     [SerializeField] List<float> multiplier = new List<float>();
 
-    //private void Start()
-    //{
-    //    InitialPosition = this.transform.localPosition;
-    //    scale = this.transform.localScale;
+    private void Start()
+    {
+        InitialPosition = this.transform.localPosition;
+        scale = this.transform.localScale;
 
-    //    XRGrabInteractable grabbable = this.GetComponent<XRGrabInteractable>();
-    //    grabbable.selectEntered.AddListener(ReattachToParent);
-    //}
+        XRGrabInteractable grabbable = this.GetComponent<XRGrabInteractable>();
+        grabbable.selectEntered.AddListener(ReattachToParent);
+    }
 
-    //private void Update()
-    //{
-    //    if (isGrabbed)
-    //    {
-    //        gameObject.transform.SetParent(parentObj);
-    //        gameObject.transform.localPosition = InitialPosition;
-    //        gameObject.transform.localScale = new Vector3(100, 100, 100);
-    //    }
-    //}
+    private void Update()
+    {
+        if (isGrabbed)
+        {
+            gameObject.transform.SetParent(parentObj);
+            gameObject.transform.localPosition = InitialPosition;
+            gameObject.transform.localScale = new Vector3(100, 100, 100);
+        }
+    }
 
-    //void ReattachToParent(BaseInteractionEventArgs arg)
-    //{
-    //    gameObject.transform.SetParent(parentObj);
-    //    gameObject.transform.localPosition = InitialPosition;
-    //    gameObject.transform.localScale = scale;
-    //}
+    void ReattachToParent(BaseInteractionEventArgs arg)
+    {
+        gameObject.transform.SetParent(parentObj);
+        gameObject.transform.localPosition = InitialPosition;
+        gameObject.transform.localScale = scale;
+    }
 
-    //void GrabbedOff(BaseInteractionEventArgs arg)
-    //{
-    //    isGrabbed = false;
-    //}
+    void GrabbedOff(BaseInteractionEventArgs arg)
+    {
+        isGrabbed = false;
+    }
 
 
 
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Spline sp;
-    [SerializeField] GameObject RightController;
-    [SerializeField] GameObject AttachPoint;
+    //Spline sp;
+    //[SerializeField] GameObject RightController;
+    //[SerializeField] GameObject AttachPoint;
 
 
-    private void Start()
-    {
-        sp = this.GetComponent<Spline>();
-        RightController = GameObject.FindGameObjectWithTag("RightController");
-        XRGrabInteractable grabbable = this.GetComponent<XRGrabInteractable>();
-        grabbable.selectEntered.AddListener(Grabbed);
-        grabbable.selectExited.AddListener(NotGrabbed);
-    }
+    //private void Start()
+    //{
+    //    sp = this.GetComponent<Spline>();
+    //    RightController = GameObject.FindGameObjectWithTag("RightController");
+    //    XRGrabInteractable grabbable = this.GetComponent<XRGrabInteractable>();
+    //    grabbable.selectEntered.AddListener(Grabbed);
+    //    grabbable.selectExited.AddListener(NotGrabbed);
+    //}
 
-    void Grabbed(BaseInteractionEventArgs arg)
-    {
-        //gameObject.transform.SetParent(parentObj);
-        //gameObject.transform.localPosition = InitialPosition;
-        //gameObject.transform.localScale = scale;
-        Debug.Log("Grabbed");
-        isGrabbed = true;
-    }
+    //void Grabbed(BaseInteractionEventArgs arg)
+    //{
+    //    //gameObject.transform.SetParent(parentObj);
+    //    //gameObject.transform.localPosition = InitialPosition;
+    //    //gameObject.transform.localScale = scale;
+    //    Debug.Log("Grabbed");
+    //    isGrabbed = true;
+    //}
 
-    void NotGrabbed(BaseInteractionEventArgs arg)
-    {
-        //gameObject.transform.SetParent(parentObj);
-        //gameObject.transform.localPosition = InitialPosition;
-        //gameObject.transform.localScale = scale;
-        Debug.Log("Not Grabbed");
-        isGrabbed = false;
-    }
+    //void NotGrabbed(BaseInteractionEventArgs arg)
+    //{
+    //    //gameObject.transform.SetParent(parentObj);
+    //    //gameObject.transform.localPosition = InitialPosition;
+    //    //gameObject.transform.localScale = scale;
+    //    Debug.Log("Not Grabbed");
+    //    isGrabbed = false;
+    //}
 
-    private void Update()
-    {
-        //if (isGrabbed == false)
-        //{
-        gameObject.transform.SetParent(parentObj);
-        gameObject.transform.localPosition = InitialPosition;
-        gameObject.transform.localScale = scale;
+    //private void Update()
+    //{
+    //    //if (isGrabbed == false)
+    //    //{
+    //    gameObject.transform.SetParent(parentObj);
+    //    gameObject.transform.localPosition = InitialPosition;
+    //    gameObject.transform.localScale = scale;
 
-        if (isGrabbed)
-        {
-            if (RightController)
-            {
-                sp.nodes[2].Position = new Vector3(RightController.transform.localPosition.x * multiplier[0] + AdditionVector.x, RightController.transform.localPosition.y * multiplier[1] + AdditionVector.y, RightController.transform.localPosition.z * multiplier[2] + AdditionVector.z);
-                Debug.Log("sp: " + sp.nodes[2].Position);
-                Debug.Log("hand: " + RightController.transform.localPosition);
+    //    if (isGrabbed)
+    //    {
+    //        if (RightController)
+    //        {
+    //            sp.nodes[2].Position = new Vector3(RightController.transform.localPosition.x * multiplier[0] + AdditionVector.x, RightController.transform.localPosition.y * multiplier[1] + AdditionVector.y, RightController.transform.localPosition.z * multiplier[2] + AdditionVector.z);
+    //            Debug.Log("sp: " + sp.nodes[2].Position);
+    //            Debug.Log("hand: " + RightController.transform.localPosition);
 
-            }
-            else
-            {
-                Debug.Log("CONTROLLER LUL");
-            }
-        }
-        else
-        {
-            sp.nodes[2].Position = defaultSplinePos;
-        }
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("CONTROLLER NO");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        sp.nodes[2].Position = defaultSplinePos;
+    //    }
 
-        //}
+    //    //}
 
-    }
+    //}
 
 }
 

@@ -88,4 +88,5 @@ public class ExtinguisherWorking : MonoBehaviour
         GameObject.Destroy(smoke);
     }
 
+   
 }

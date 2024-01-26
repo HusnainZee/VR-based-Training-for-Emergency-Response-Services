@@ -22,8 +22,9 @@ public class TurnOffObjectOnCollision : MonoBehaviour
         {
             if (this.gameObject.CompareTag("AlarmPointer"))
             {
+                if(RingTheAlarm != null)
+                    RingTheAlarm.Play();
                 this.gameObject.SetActive(false);
-                RingTheAlarm.Play();
             }
             else if (this.gameObject.CompareTag("PASSpointer"))
             {
