@@ -15,6 +15,7 @@ TagManager:
   - LeftController
   - RightController
   - Ground
+  - XRI
   layers:
   - Default
   - TransparentFX

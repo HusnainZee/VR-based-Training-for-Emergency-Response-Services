@@ -11,7 +11,7 @@ public class ResetXRInteractionPositionOnStart : MonoBehaviour
 
     private void Awake()
     {
-        //XRInteraction = GameObject.Find("XR Origin (XR Rig)");
+        XRInteraction = GameObject.FindGameObjectWithTag("XRI");
 
         if (XRInteraction)
         {

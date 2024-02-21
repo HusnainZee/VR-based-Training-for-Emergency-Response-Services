@@ -1,21 +1,28 @@
 
 using UnityEngine;
+using System.Collections.Generic;
+using TMPro;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
-    public static DontDestroyOnLoad instance;
+    public List<GameObject> dontDestroyObjects = new List<GameObject>();
+    public List<GameObject> AddedtoList = new List<GameObject>();
 
     private void Awake()
     {
-        if (instance == null)
+        for(int i = 0; i < dontDestroyObjects.Count; i++)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (!AddedtoList.Contains(dontDestroyObjects[i]))
+            {
+                AddedtoList.Add(dontDestroyObjects[i]);
+                DontDestroyOnLoad(dontDestroyObjects[i]);
+            }
+            else
+            {
+                //Destroy(added);
+            }
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
 }
