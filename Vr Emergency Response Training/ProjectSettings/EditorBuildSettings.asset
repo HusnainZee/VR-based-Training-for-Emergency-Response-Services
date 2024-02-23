@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/PROJECT/HUSNAIN/Scenes/Main Menu.unity
+    path: Assets/PROJECT/HUSNAIN/FIRE EXTINGUISHER/Scenes/Main Menu.unity
     guid: b9b701570ec355941852a56040961832
   - enabled: 1
-    path: Assets/PROJECT/HUSNAIN/Scenes/Fire Extinguisher.unity
+    path: Assets/PROJECT/HUSNAIN/FIRE EXTINGUISHER/Scenes/Fire Extinguisher.unity
     guid: fcb7cf9d73bdb514f84163f4b7927865
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9061770cf4f971e41be6add49087aac6, type: 2}
