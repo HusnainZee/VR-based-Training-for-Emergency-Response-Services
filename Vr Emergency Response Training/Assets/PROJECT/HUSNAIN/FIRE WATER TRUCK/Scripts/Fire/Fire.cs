@@ -110,11 +110,11 @@ public class Fire : MonoBehaviour, IWaterInteractable
         {
             this.pSystem.Stop();
         }
-        if (notify)
-        {
-            this.NotifyAllNeighbors();
-            FireController.Instance.FireChanged(this.isOn ? 1 : -1);
-        }
+        //if (notify)
+        //{
+        //    this.NotifyAllNeighbors();
+        //    FireController.Instance.FireChanged(this.isOn ? 1 : -1);
+        //}
     }
 
     public void WaterHit(Vector3 normal)

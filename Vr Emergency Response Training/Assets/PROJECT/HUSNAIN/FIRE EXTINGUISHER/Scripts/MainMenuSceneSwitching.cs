@@ -27,4 +27,9 @@ public class MainMenuSceneSwitching : MonoBehaviour
         PlayerPrefs.SetInt("ObjectOnFire", 2);
         SceneManager.LoadScene("Fire Extinguisher");
     }
+
+    public void SceneLoadFireWaterTruckPipe()
+    {
+        SceneManager.LoadScene("Firetruck Water Hose");
+    }
 }
