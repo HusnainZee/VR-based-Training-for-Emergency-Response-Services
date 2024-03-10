@@ -53820,23 +53820,23 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 0
-        y: 0
-        z: 0
+        x: 0.0010910034
+        y: -0.47133148
+        z: -0.01569748
       TangentIn:
         x: -0
         y: -0
-        z: -0.20259783
+        z: -0.16528098
       TangentOut:
         x: 0
         y: 0
-        z: 0.20259783
+        z: 0.16528098
       Rotation:
         value:
-          x: 0.33843878
-          y: -0.47717643
-          z: 0.37855142
-          w: 0.7172591
+          x: 0.27152324
+          y: -0.47764573
+          z: 0.3591575
+          w: 0.75441074
     - Position:
         x: -0.86769676
         y: -1.715534
@@ -53844,17 +53844,17 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -0.5012397
+        z: -0.42641988
       TangentOut:
         x: 0
         y: 0
-        z: 0.52545416
+        z: 0.49491745
       Rotation:
         value:
-          x: 0.3501032
-          y: 0.10143162
-          z: -0.048460387
-          w: 0.92994136
+          x: 0.31304324
+          y: 0.06677875
+          z: -0.060875192
+          w: 0.94543046
     - Position:
         x: 0.58542824
         y: -1.9644734
@@ -55652,7 +55652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1778657385
 Transform:
   m_ObjectHideFlags: 0
