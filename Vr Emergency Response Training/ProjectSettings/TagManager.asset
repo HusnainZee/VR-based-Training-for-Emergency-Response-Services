@@ -16,6 +16,8 @@ TagManager:
   - RightController
   - Ground
   - XRI
+  - HoseHandle
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - Interactable
   - ExtMaterial
   - FireParticle
-  - 
+  - PostProcessing
   - 
   - 
   - 
