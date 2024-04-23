@@ -13,6 +13,8 @@ public class FlammableObject : MonoBehaviour
 
     float temperature = 30f;
 
+    public float Temperature { get { return temperature; } }
+
     bool Onfire = false;
     public void AddHeat(float heat)
     {
@@ -46,7 +48,7 @@ public class FlammableObject : MonoBehaviour
         GetComponent<Renderer>().material.color = newColor;
     }
 
-
+    
 
 
 }
