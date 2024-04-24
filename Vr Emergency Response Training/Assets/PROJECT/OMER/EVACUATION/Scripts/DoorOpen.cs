@@ -25,6 +25,7 @@ public class DoorOpen : MonoBehaviour
     private void Update()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, GotoState, Time.deltaTime);
+        TemperatureValueSet();
     }
 
     public void ToggleState()
@@ -47,7 +48,7 @@ public class DoorOpen : MonoBehaviour
     public void TemperatureValueSet()
     {
         float temperature = door.Temperature;
-        TemperatureText.text = temperature.ToString();
+        TemperatureText.text = Mathf.Floor(temperature).ToString();
 
         float redVal = (temperature / 500f);
         Color newColor = new Color(redVal, 0.5f, 1 - redVal, 1);

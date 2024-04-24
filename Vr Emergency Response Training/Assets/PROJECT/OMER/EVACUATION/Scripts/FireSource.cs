@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class FireSource : MonoBehaviour
 {
-    //[SerializeField] Transform ProbePoints;
+    [SerializeField] Transform ScaleObject;
 
     List<FlammableObject> flammableList = new List<FlammableObject>();
     [SerializeField] float intensity = 1;
     [SerializeField] float spreadChance = 0;
     [SerializeField] float heatOutput = 10;
 
-    float maxScale = 3f;
+
+    float maxIntensity = 3f;
+    float maxScale = 2f;
+    float maxScaleVisual = 1f;
+    private ParticleSystem fireParticles;
+    private float decreasePerCollision = 1f;
+    private float intensityResistance = 10f;
+    private float intensityToExtinguish = 0.1f;
+
+
+    int particleCollisions;
+
     private void Start()
     {
+
+        particleCollisions = 0;
+        fireParticles = GetComponent<ParticleSystem>();
         StartCoroutine(PeriodicAttributeUpdate());
         maxScale = Random.Range(2f, 3f);
     }
@@ -32,7 +46,9 @@ public class FireSource : MonoBehaviour
         intensity += (intensity / 2);
         spreadChance += (intensity * heatOutput) / 100f;
 
-        ScaleWithIntensity();
+        intensity = Mathf.Clamp(intensity, 0, maxIntensity);
+
+        ScaleWithIntensity(1);
         CalculateHeatOutput();
     }
 
@@ -41,15 +57,18 @@ public class FireSource : MonoBehaviour
         heatOutput = 10 * intensity * spreadChance;
     }
 
-    void ScaleWithIntensity()
+    void ScaleWithIntensity(int scaleDirection)
     {
-        float currentScale = transform.localScale.x;
-        float newScale = currentScale + (intensity / 2);
 
-        if (newScale >= maxScale)
-            newScale = maxScale;
+        float scaleFactor = intensity / maxIntensity;
+        float newScale = maxScale * scaleFactor;
+        float newScaleVisual = maxScaleVisual * scaleFactor;
+
+        newScale = Mathf.Clamp(newScale, 1f, maxScale);
+        newScaleVisual = Mathf.Clamp(newScaleVisual, 0.1f, maxScaleVisual);
         
         transform.localScale = Vector3.one * newScale;
+        ScaleObject.localScale = Vector3.one * newScaleVisual;
     }
 
 
@@ -61,7 +80,10 @@ public class FireSource : MonoBehaviour
             if(!flammableList.Contains(flammableObject));
                 flammableList.Add(flammableObject);
         }
+       
     }
+
+  
 
 
     IEnumerator PeriodicAttributeUpdate()
@@ -71,5 +93,36 @@ public class FireSource : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(10f, 20f));
             IncreaseSpreadAndIntensity();
         }
+    }
+
+
+
+
+    private void OnParticleCollision(GameObject other)
+    {
+
+        if(other.CompareTag("ExtParticles"))
+        {
+            ExtinguishFireLogic();
+        }
+    }
+
+    void ExtinguishFireLogic()
+    {
+
+        particleCollisions++;
+        intensity -= Time.deltaTime * (decreasePerCollision / (intensityResistance * intensity));
+        Debug.Log("Intensity " + intensity);
+        if (intensity <= intensityToExtinguish)
+        {
+            Debug.Log("Destroying Fire Source" + gameObject.name);
+            Destroy(this.gameObject);
+        }
+
+
+        ScaleWithIntensity(-1);
+        CalculateHeatOutput();
+
+
     }
 }

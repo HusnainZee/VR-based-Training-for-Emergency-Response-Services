@@ -59,11 +59,13 @@ public class ExtinguisherWorking : MonoBehaviour
 
         if (isFirst)
         {
-            SweepAudio.Play();
+            if(SweepAudio != null)
+                SweepAudio.Play();
             isFirst = false;
         }
 
-        AimAudio.Stop();
+        if(AimAudio != null)
+            AimAudio.Stop();
     }
 
 

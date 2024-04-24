@@ -13,15 +13,22 @@ public class FumeZone : MonoBehaviour
         player = other.GetComponent<Player>();
 
         if (player != null)
+        {
+            Debug.Log("Player Entered");
             player.EnterFumes(fumeIntensity);
+
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(player != null)
+        player = other.GetComponent<Player>();
+
+        if (player != null)
         {
+            Debug.Log("Player Exited");
             player.ExitFumes();
-            player = null;
+
         }
     }
 

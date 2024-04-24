@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
 
     public void ExitFumes()
     {
+        Debug.Log("Exited Fumes");
         inFumes = false;
     }
 
@@ -64,16 +65,25 @@ public class Player : MonoBehaviour
         {
             if ((wearingMask || !inFumes) && oxygenRemaining < maxOxygen)
             {
-                oxygenRemaining++;
+                oxygenRemaining+=10;
+                HudManager.instance.OxygenEffect(oxygenRemaining / maxOxygen);
             }
             else if(inFumes && !wearingMask)
             {
-                if(oxygenRemaining >= 0)
-                    oxygenRemaining -= oxygenReductionRate;
-
-                if (oxygenRemaining <= 0)
+                if(oxygenRemaining > 0)
                 {
-                    playerHealth--;
+                    oxygenRemaining -= oxygenReductionRate;
+                    HudManager.instance.OxygenEffect(oxygenRemaining / maxOxygen);
+
+                    if (oxygenRemaining <= 0f)
+                        HudManager.instance.HealthEffect();
+                }
+                else if (oxygenRemaining <= 0)
+                {
+                    if(playerHealth > 0)
+                    {
+                        playerHealth--;
+                    }
                 }
 
                 if (playerHealth <= 0)
@@ -82,10 +92,15 @@ public class Player : MonoBehaviour
                 }
             }
 
+            oxygenRemaining = Mathf.Clamp(oxygenRemaining, 0, maxOxygen);
+            playerHealth = Mathf.Clamp(playerHealth, 0, PlayerMaxHealth);
+
+
             yield return new WaitForSeconds(0.25f);
 
         }
     }
 
+    
 
 }

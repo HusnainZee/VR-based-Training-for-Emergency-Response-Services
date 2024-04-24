@@ -30,9 +30,9 @@ TagManager:
   - ExtMaterial
   - FireParticle
   - PostProcessing
-  - 
-  - 
-  - 
+  - RayIgnoreGrab
+  - PlayerMask
+  - NPCMask
   - 
   - 
   - 
