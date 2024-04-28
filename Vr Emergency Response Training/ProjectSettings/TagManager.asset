@@ -18,6 +18,7 @@ TagManager:
   - XRI
   - HoseHandle
   - Water
+  - Injured
   layers:
   - Default
   - TransparentFX
