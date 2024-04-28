@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
 
 
     bool inFumes = false;
+    bool inFire = false;
     float oxygenReductionRate;
 
     private void Start()
@@ -30,6 +31,8 @@ public class Player : MonoBehaviour
         oxygenRemaining = maxOxygen;
         wearingMask = false;
         inFumes = false;
+        inFire = false;
+
 
         StartCoroutine(BreatheOxygen());
     }
@@ -45,6 +48,17 @@ public class Player : MonoBehaviour
     {
         inFumes = true;
         oxygenReductionRate = fumeIntensity / 2f;
+    }
+
+    public void EnterFire()
+    {
+        inFire = true;
+    }
+
+    public void ExitFire()
+    {
+        inFire = false;
+        HudManager.instance.ClearAllEffects();
     }
 
     public void ExitFumes()
@@ -63,7 +77,18 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            if ((wearingMask || !inFumes) && oxygenRemaining < maxOxygen)
+
+            if(inFire)
+            {
+                if (playerHealth > 0)
+                {
+                    playerHealth-=5;
+                    HudManager.instance.HealthEffect();
+                    if (playerHealth <= 0)
+                        SceneHandler.instance.Failed("Died due to being in fire!");
+                }
+            }
+            else if ((wearingMask || !inFumes) && oxygenRemaining < maxOxygen)
             {
                 oxygenRemaining+=10;
                 HudManager.instance.OxygenEffect(oxygenRemaining / maxOxygen);
@@ -88,6 +113,8 @@ public class Player : MonoBehaviour
 
                 if (playerHealth <= 0)
                 {
+
+                    SceneHandler.instance.Failed("Suffocated due to fumes!");
                     Debug.Log("Out of Oxygen!");
                 }
             }

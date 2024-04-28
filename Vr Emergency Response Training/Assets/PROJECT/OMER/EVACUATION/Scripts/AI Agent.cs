@@ -14,7 +14,6 @@ public class AIAgent : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agentRef = GetComponent<NavMeshAgent>();
-        RunToInjured();
     }
 
     public void RunToInjured()

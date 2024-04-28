@@ -57,12 +57,12 @@ public class HudManager : MonoBehaviour
     {
         healthEffect = false;
         vignette.color.value = Color.black;
-        vignette .intensity.value = 1 - oxygen;
+        vignette.intensity.value = 1 - oxygen;
     }
 
     public void HealthEffect()
     {
-
+        vignette.intensity.value = 1f;
         StartCoroutine(ExecuteHealthEffect());
         
     }
@@ -78,6 +78,14 @@ public class HudManager : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
     }
+
+    public void ClearAllEffects()
+    {
+        healthEffect = false;
+        FadePanel.alpha = 0f;
+        vignette.intensity.value = 0f;
+    }
+
 
     
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FireSource : MonoBehaviour
@@ -80,9 +81,25 @@ public class FireSource : MonoBehaviour
             if(!flammableList.Contains(flammableObject));
                 flammableList.Add(flammableObject);
         }
+
+        if(other.CompareTag("Player"))
+        {
+            Debug.Log(other.gameObject.name);
+            Player player = other.gameObject.GetComponentInChildren<Player>();
+            player.EnterFire();
+        }
        
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log(other.gameObject.name);
+            Player player = other.gameObject.GetComponentInChildren<Player>();
+            player.ExitFire();
+        }
+    }
   
 
 
