@@ -32,4 +32,14 @@ public class MainMenuSceneSwitching : MonoBehaviour
     {
         SceneManager.LoadScene("Firetruck Water Hose");
     }
+
+    public void SceneLoadEvacuation()
+    {
+        SceneManager.LoadScene("Evacuation");
+    }
+
+    public void SceneLoadDemo()
+    {
+        SceneManager.LoadScene("DemoScene");
+    }
 }

@@ -52,11 +52,13 @@ public class Player : MonoBehaviour
 
     public void EnterFire()
     {
+        Debug.Log("Enter Fire");
         inFire = true;
     }
 
     public void ExitFire()
     {
+        Debug.Log("Exit Fire");
         inFire = false;
         HudManager.instance.ClearAllEffects();
     }
