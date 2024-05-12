@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7753845364921841687}
   - component: {fileID: 2497867547761822853}
   - component: {fileID: 2772926618762352160}
+  - component: {fileID: 3043660099963785787}
   - component: {fileID: 2316807018566083556}
   m_Layer: 12
   m_Name: Gas Mask
@@ -112,10 +113,46 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3043660099963785787}
+        m_TargetAssemblyTypeName: RespawnSelf, Assembly-CSharp
+        m_MethodName: SetGrabState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3043660099963785787}
+        m_TargetAssemblyTypeName: RespawnSelf, Assembly-CSharp
+        m_MethodName: SetGrabState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -214,6 +251,20 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &3043660099963785787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4167929255404468539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fa68af492e7774ba876ef22c3ae2f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPosition: {fileID: 0}
+  YOffset: 0.25
 --- !u!65 &2316807018566083556
 BoxCollider:
   m_ObjectHideFlags: 0

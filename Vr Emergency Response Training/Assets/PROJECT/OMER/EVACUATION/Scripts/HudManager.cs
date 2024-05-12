@@ -63,19 +63,36 @@ public class HudManager : MonoBehaviour
     public void HealthEffect()
     {
         vignette.intensity.value = 1f;
-        StartCoroutine(ExecuteHealthEffect());
-        
+        if (!healthEffect)
+        {
+            healthEffect = true;
+            StartCoroutine(ExecuteHealthEffect());
+        }
     }
 
     IEnumerator ExecuteHealthEffect()
     {
-        float redVal = 0f;
-        while (redVal <= 1f)
+
+        float redValInit = 0f;
+        while(healthEffect)
         {
-            redVal += (FadeSpeed * Time.deltaTime) / 100f;
-            Color vigColor = new Color(redVal, 0, 0, 1f);
-            vignette.color.value = vigColor;
-            yield return new WaitForSeconds(0.01f);
+            float redVal = redValInit;
+            while (redVal <= 1f)
+            {
+                redVal += (FadeSpeed * Time.deltaTime) / 100f;
+                Color vigColor = new Color(redVal, 0, 0, 1f);
+                vignette.color.value = vigColor;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            redValInit = 0.5f;
+            while (redVal >= redValInit)
+            {
+                redVal -= (FadeSpeed * Time.deltaTime) / 100f;
+                Color vigColor = new Color(redVal, 0, 0, 1f);
+                vignette.color.value = vigColor;
+                yield return new WaitForSeconds(0.01f);
+            }
         }
     }
 

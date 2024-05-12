@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] TextMeshProUGUI MaskText;
 
 
-
+    
     [SerializeField] float PlayerMaxHealth = 100f;
-    [SerializeField] bool wearingMask;
+    bool wearingMask;
 
 
     float maxOxygen = 100f;
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     bool inFumes = false;
     bool inFire = false;
     float oxygenReductionRate;
+    float damageFromFire = 1f;
 
     private void Start()
     {
@@ -39,9 +40,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HealthText.text = string.Format("Health: {0}%", playerHealth);
-        OxygenText.text = string.Format("Oxygen: {0}%", oxygenRemaining);
-        MaskText.text = string.Format("Mask: {0}", (wearingMask ? "ON" : "OFF"));
+        HealthText.text = string.Format("{0}%", playerHealth);
+        OxygenText.text = string.Format("{0}%", oxygenRemaining);
+        MaskText.text = string.Format("{0}", (wearingMask ? "ON" : "OFF"));
     }
 
     public void EnterFumes(float fumeIntensity)
@@ -84,7 +85,7 @@ public class Player : MonoBehaviour
             {
                 if (playerHealth > 0)
                 {
-                    playerHealth-=5;
+                    playerHealth-= damageFromFire;
                     HudManager.instance.HealthEffect();
                     if (playerHealth <= 0)
                         SceneHandler.instance.Failed("Died due to being in fire!");
@@ -102,14 +103,13 @@ public class Player : MonoBehaviour
                     oxygenRemaining -= oxygenReductionRate;
                     HudManager.instance.OxygenEffect(oxygenRemaining / maxOxygen);
 
-                    if (oxygenRemaining <= 0f)
-                        HudManager.instance.HealthEffect();
                 }
                 else if (oxygenRemaining <= 0)
                 {
-                    if(playerHealth > 0)
+                    if (playerHealth > 0)
                     {
                         playerHealth--;
+                        HudManager.instance.HealthEffect();
                     }
                 }
 
@@ -119,6 +119,10 @@ public class Player : MonoBehaviour
                     SceneHandler.instance.Failed("Suffocated due to fumes!");
                     Debug.Log("Out of Oxygen!");
                 }
+            }
+            else
+            {
+                HudManager.instance.ClearAllEffects();
             }
 
             oxygenRemaining = Mathf.Clamp(oxygenRemaining, 0, maxOxygen);

@@ -18,7 +18,7 @@ public class FireSource : MonoBehaviour
     float maxScaleVisual = 1f;
     private ParticleSystem fireParticles;
     private float decreasePerCollision = 1f;
-    private float intensityResistance = 10f;
+    private float intensityResistance = 6f;
     private float intensityToExtinguish = 0.1f;
 
 
@@ -86,7 +86,11 @@ public class FireSource : MonoBehaviour
         {
             Debug.Log(other.gameObject.name);
             Player player = other.gameObject.GetComponentInChildren<Player>();
-            player.EnterFire();
+
+            if(CanAffectPlayer(other.gameObject.transform))
+            {
+                player.EnterFire();
+            }
         }
        
     }
@@ -140,6 +144,23 @@ public class FireSource : MonoBehaviour
         ScaleWithIntensity(-1);
         CalculateHeatOutput();
 
+    }
 
+    bool CanAffectPlayer(Transform player)
+    {
+        RaycastHit hit;
+        Vector3 direction = player.transform.position - transform.position;
+        if (Physics.Raycast(transform.position, direction, out hit, 2 * intensity))
+        {
+
+
+            //Debug.Log("Raycast got: " + hit.collider.gameObject.name);
+            if (hit.collider.gameObject.CompareTag("Player"))
+                return true;
+           
+        }
+
+        return false;
+           
     }
 }

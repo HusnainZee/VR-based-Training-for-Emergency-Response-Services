@@ -42,7 +42,7 @@ public class TPSystem : MonoBehaviour
 
         TeleportRequest request = new TeleportRequest();
         request.destinationPosition = worldPos;
-        request.destinationRotation = teleportTo.rotation;
+        request.destinationRotation = Quaternion.Euler(teleportTo.forward);
         request.requestTime = 0.5f;
 
         TPController.QueueTeleportRequest(request);
