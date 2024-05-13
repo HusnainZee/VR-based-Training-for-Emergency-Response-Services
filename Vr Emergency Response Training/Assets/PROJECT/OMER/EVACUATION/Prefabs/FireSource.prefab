@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 118693887310513900}
   - component: {fileID: 2474506156823626088}
   - component: {fileID: 3209328377331296774}
+  - component: {fileID: 2733783063475356480}
   m_Layer: 9
   m_Name: FireSource
   m_TagString: Untagged
@@ -185,6 +186,10 @@ MonoBehaviour:
   intensity: 1
   spreadChance: 0
   heatOutput: 10
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 14323
+  FireBar: {fileID: 0}
 --- !u!136 &2474506156823626088
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -231,6 +236,19 @@ CapsuleCollider:
   m_Height: 1.89
   m_Direction: 1
   m_Center: {x: 0, y: 0.46, z: 0}
+--- !u!114 &2733783063475356480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4420425365066603726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac98a3a32b7cbd44b1873b2852a069c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireMeterPrefab: {fileID: 8120348427190352879, guid: 90823295963ffb141a8a51849d825fc5, type: 3}
 --- !u!1001 &3432379839126354540
 PrefabInstance:
   m_ObjectHideFlags: 0

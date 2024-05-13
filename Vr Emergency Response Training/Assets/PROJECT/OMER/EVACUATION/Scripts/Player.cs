@@ -5,7 +5,7 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-
+    public static Player instance;
     [SerializeField] TextMeshProUGUI HealthText;
     [SerializeField] TextMeshProUGUI OxygenText;
     [SerializeField] TextMeshProUGUI MaskText;
@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
     bool inFire = false;
     float oxygenReductionRate;
     float damageFromFire = 1f;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {

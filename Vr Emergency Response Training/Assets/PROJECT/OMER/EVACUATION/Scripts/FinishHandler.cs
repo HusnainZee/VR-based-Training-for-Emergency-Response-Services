@@ -11,12 +11,13 @@ public class FinishHandler : MonoBehaviour
     {
         if(other.CompareTag("Injured"))
         {
-            Invoke("Finish", 1f);
+            Invoke("Finish", 2f);
         }
     }
 
     void Finish()
     {
+        HudManager.instance.ExecuteFade();
         UnconciousMan.SetActive(false);
         SceneHandler.instance.Finished();
     }

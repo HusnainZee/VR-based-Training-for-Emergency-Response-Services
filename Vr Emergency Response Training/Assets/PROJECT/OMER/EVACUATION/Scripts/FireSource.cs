@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FireSource : MonoBehaviour
 {
     [SerializeField] Transform ScaleObject;
 
     List<FlammableObject> flammableList = new List<FlammableObject>();
+
+    [Header("FireProperties")]
     [SerializeField] float intensity = 1;
     [SerializeField] float spreadChance = 0;
     [SerializeField] float heatOutput = 10;
+    [SerializeField] LayerMask PlayerLayer;
+
+
+    [SerializeField] Slider FireBar;
 
 
     float maxIntensity = 3f;
@@ -23,10 +30,11 @@ public class FireSource : MonoBehaviour
 
 
     int particleCollisions;
+    Player player;
 
     private void Start()
     {
-
+        player = Player.instance;
         particleCollisions = 0;
         fireParticles = GetComponent<ParticleSystem>();
         StartCoroutine(PeriodicAttributeUpdate());
@@ -40,6 +48,8 @@ public class FireSource : MonoBehaviour
         {
             obj.AddHeat(heatOutput * Time.deltaTime);
         }
+
+        UpdateFireMeter();
     }
 
     void IncreaseSpreadAndIntensity()
@@ -85,9 +95,8 @@ public class FireSource : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             Debug.Log(other.gameObject.name);
-            Player player = other.gameObject.GetComponentInChildren<Player>();
 
-            if(CanAffectPlayer(other.gameObject.transform))
+            if(player != null && CanAffectPlayer(other.gameObject.transform))
             {
                 player.EnterFire();
             }
@@ -95,12 +104,24 @@ public class FireSource : MonoBehaviour
        
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            
+
+            if (player != null && CanAffectPlayer(other.gameObject.transform))
+            {
+                player.EnterFire();
+            }
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log(other.gameObject.name);
-            Player player = other.gameObject.GetComponentInChildren<Player>();
             player.ExitFire();
         }
     }
@@ -137,6 +158,7 @@ public class FireSource : MonoBehaviour
         if (intensity <= intensityToExtinguish)
         {
             Debug.Log("Destroying Fire Source" + gameObject.name);
+            gameObject.GetComponent<AttachFireMeter>().DestroyMeter();
             Destroy(this.gameObject);
         }
 
@@ -150,11 +172,11 @@ public class FireSource : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 direction = player.transform.position - transform.position;
-        if (Physics.Raycast(transform.position, direction, out hit, 2 * intensity))
+        if (Physics.Raycast(transform.position, direction, out hit, 2 * intensity, PlayerLayer))
         {
 
 
-            //Debug.Log("Raycast got: " + hit.collider.gameObject.name);
+            Debug.Log("Raycast got: " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.CompareTag("Player"))
                 return true;
            
@@ -163,4 +185,11 @@ public class FireSource : MonoBehaviour
         return false;
            
     }
+
+    void UpdateFireMeter()
+    {
+        float fillValue = intensity / maxIntensity;
+        gameObject.GetComponent<AttachFireMeter>().UpdateMeter(fillValue);
+    }
+
 }

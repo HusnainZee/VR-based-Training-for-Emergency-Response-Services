@@ -47,7 +47,7 @@ public class HudManager : MonoBehaviour
 
         while (vignette.intensity.value > 0f)
         {
-            vignette.intensity.value -= (FadeSpeed * Time.deltaTime)/100f;
+            vignette.intensity.value -= (FadeSpeed * Time.deltaTime)/10000f;
             FadePanel.alpha = vignette.intensity.value;
             yield return new WaitForSeconds(0.01f);
         }
