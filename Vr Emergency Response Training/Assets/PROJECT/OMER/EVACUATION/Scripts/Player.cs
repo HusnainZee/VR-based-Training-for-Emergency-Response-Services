@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] TextMeshProUGUI HealthText;
     [SerializeField] TextMeshProUGUI OxygenText;
     [SerializeField] TextMeshProUGUI MaskText;
+    [SerializeField] bool Breathe = true;
+
 
 
     
@@ -33,21 +35,30 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        playerHealth = PlayerMaxHealth;
-        oxygenRemaining = maxOxygen;
+
+        if (HealthText != null && OxygenText != null)
+        {
+            playerHealth = PlayerMaxHealth;
+            oxygenRemaining = maxOxygen;
+        }
+
         wearingMask = false;
         inFumes = false;
         inFire = false;
 
-
-        StartCoroutine(BreatheOxygen());
+        if(Breathe)
+            StartCoroutine(BreatheOxygen());
     }
 
     private void Update()
     {
-        HealthText.text = string.Format("{0}%", playerHealth);
-        OxygenText.text = string.Format("{0}%", oxygenRemaining);
-        MaskText.text = string.Format("{0}", (wearingMask ? "ON" : "OFF"));
+        if(HealthText != null && OxygenText != null)
+        {
+            HealthText.text = string.Format("{0}%", playerHealth);
+            OxygenText.text = string.Format("{0}%", oxygenRemaining);
+            MaskText.text = string.Format("{0}", (wearingMask ? "ON" : "OFF"));
+        }
+        
     }
 
     public void EnterFumes(float fumeIntensity)

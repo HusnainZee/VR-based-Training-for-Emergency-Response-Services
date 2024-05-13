@@ -14,6 +14,7 @@ public class FireSource : MonoBehaviour
     [SerializeField] float intensity = 1;
     [SerializeField] float spreadChance = 0;
     [SerializeField] float heatOutput = 10;
+    [SerializeField] private float decreasePerCollision = 1f;
     [SerializeField] LayerMask PlayerLayer;
 
 
@@ -24,7 +25,7 @@ public class FireSource : MonoBehaviour
     float maxScale = 2f;
     float maxScaleVisual = 1f;
     private ParticleSystem fireParticles;
-    private float decreasePerCollision = 1f;
+    
     private float intensityResistance = 6f;
     private float intensityToExtinguish = 0.1f;
 
@@ -132,8 +133,8 @@ public class FireSource : MonoBehaviour
     {
         while(gameObject.activeInHierarchy)
         {
-            yield return new WaitForSeconds(Random.Range(10f, 20f));
             IncreaseSpreadAndIntensity();
+            yield return new WaitForSeconds(Random.Range(10f, 20f));
         }
     }
 
@@ -142,7 +143,7 @@ public class FireSource : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-
+        Debug.Log("Particle Collisions");
         if(other.CompareTag("ExtParticles"))
         {
             ExtinguishFireLogic();
