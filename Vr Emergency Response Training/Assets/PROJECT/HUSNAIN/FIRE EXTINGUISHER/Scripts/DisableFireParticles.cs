@@ -1,17 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DisableFireParticles : MonoBehaviour
 {
+
+
+    
     [SerializeField] List<GameObject> FireParticles = new List<GameObject>();
-    int countExtinguishedFires = 0;
+    [SerializeField] int countExtinguishedFires = 0;
     [SerializeField] GameObject CertificateImage;
+
+    [SerializeField] GameObject[] LocomotionSystems;
 
     private void Start()
     {
+        countExtinguishedFires = 0;
         PlayerPrefs.SetInt("FireCollisions", 0);
         CertificateImage.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        FireSource.FireExtinguished += FireExtinguished;
+    }
+    private void OnDisable()
+    {
+        FireSource.FireExtinguished -= FireExtinguished;
+
     }
 
     void Update()
@@ -44,5 +62,20 @@ public class DisableFireParticles : MonoBehaviour
             CertificateImage.SetActive(true);
         }
 
+    }
+
+    void FireExtinguished()
+    {
+        countExtinguishedFires += 1;
+        if(countExtinguishedFires >= 2)
+        {
+
+            foreach (GameObject obj in LocomotionSystems)
+            {
+                obj.SetActive(false);
+            }
+
+            CertificateImage.SetActive(true);
+        }
     }
 }

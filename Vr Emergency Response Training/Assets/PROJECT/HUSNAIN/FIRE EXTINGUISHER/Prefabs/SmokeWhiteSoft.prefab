@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2902735125825053798}
   m_Layer: 8
   m_Name: SmokeWhiteSoft
-  m_TagString: Untagged
+  m_TagString: ExtParticles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

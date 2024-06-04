@@ -19,6 +19,7 @@ TagManager:
   - HoseHandle
   - Water
   - Injured
+  - TrafficLight
   layers:
   - Default
   - TransparentFX
@@ -34,11 +35,11 @@ TagManager:
   - RayIgnoreGrab
   - PlayerMask
   - NPCMask
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Road
+  - Traffic
+  - Buildings
+  - Obstacle
+  - Player
   - 
   - 
   - 

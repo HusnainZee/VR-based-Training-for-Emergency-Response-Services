@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,12 +7,15 @@ using UnityEngine.UI;
 
 public class FireSource : MonoBehaviour
 {
+
+    public static event Action FireExtinguished;
     [SerializeField] Transform ScaleObject;
 
     List<FlammableObject> flammableList = new List<FlammableObject>();
 
     [Header("FireProperties")]
     [SerializeField] float intensity = 1;
+    [SerializeField] float intensityIncreaseFactor = 1;
     [SerializeField] float spreadChance = 0;
     [SerializeField] float heatOutput = 10;
     [SerializeField] private float decreasePerCollision = 1f;
@@ -39,7 +43,7 @@ public class FireSource : MonoBehaviour
         particleCollisions = 0;
         fireParticles = GetComponent<ParticleSystem>();
         StartCoroutine(PeriodicAttributeUpdate());
-        maxScale = Random.Range(2f, 3f);
+        maxScale = UnityEngine.Random.Range(2f, 3f);
     }
 
 
@@ -55,7 +59,7 @@ public class FireSource : MonoBehaviour
 
     void IncreaseSpreadAndIntensity()
     {
-        intensity += (intensity / 2);
+        intensity += (intensity / 2) * intensityIncreaseFactor;
         spreadChance += (intensity * heatOutput) / 100f;
 
         intensity = Mathf.Clamp(intensity, 0, maxIntensity);
@@ -134,7 +138,7 @@ public class FireSource : MonoBehaviour
         while(gameObject.activeInHierarchy)
         {
             IncreaseSpreadAndIntensity();
-            yield return new WaitForSeconds(Random.Range(10f, 20f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(10f, 20f));
         }
     }
 
@@ -160,6 +164,7 @@ public class FireSource : MonoBehaviour
         {
             Debug.Log("Destroying Fire Source" + gameObject.name);
             gameObject.GetComponent<AttachFireMeter>().DestroyMeter();
+            FireExtinguished?.Invoke();
             Destroy(this.gameObject);
         }
 
