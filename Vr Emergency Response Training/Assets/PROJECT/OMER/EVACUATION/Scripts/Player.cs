@@ -102,6 +102,7 @@ public class Player : MonoBehaviour
                 if (playerHealth > 0)
                 {
                     playerHealth-= damageFromFire;
+                    PlayerHudPanel.instance.DisplayWarning("You are taking damage from fire!", 2f);
                     HudManager.instance.HealthEffect();
                     if (playerHealth <= 0)
                         SceneHandler.instance.Failed("Died due to being in fire!");
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
                 if(oxygenRemaining > 0)
                 {
                     oxygenRemaining -= oxygenReductionRate;
+                    PlayerHudPanel.instance.DisplayWarning("You are suffocating due to fumes!\nYou need to be wearing a mask!", 2f);
                     HudManager.instance.OxygenEffect(oxygenRemaining / maxOxygen);
 
                 }

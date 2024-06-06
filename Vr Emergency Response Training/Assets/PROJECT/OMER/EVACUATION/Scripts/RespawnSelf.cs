@@ -8,30 +8,26 @@ public class RespawnSelf : MonoBehaviour
     [SerializeField] float YOffset;
 
     bool isGrabbed = false;
-    Vector3 tpPos;
 
     private void Start()
     {
         isGrabbed = false;
-
-        tpPos = respawnPosition.position;
+        
         //if (respawnPosition.parent != null)
         //    tpPos = respawnPosition.parent.TransformPoint(respawnPosition.position);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision Detected");
+       
 
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Ground Detected");
             if(!isGrabbed)
             {
-
-                Debug.Log("Respawn Initiated");
+                PlayerHudPanel.instance.DisplayInformation("You Dropped Your Equipment\nIt has been respawned your toolbelt", 2.5f);
                 respawnPosition.gameObject.SetActive(true);
-                ItemRespawner.instance.RespawnItem(this.gameObject, tpPos);
+                ItemRespawner.instance.RespawnItem(this.gameObject, respawnPosition.position);
 
             }
         }

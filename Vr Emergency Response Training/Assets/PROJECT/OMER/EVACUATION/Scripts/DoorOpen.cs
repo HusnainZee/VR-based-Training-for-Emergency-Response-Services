@@ -24,25 +24,25 @@ public class DoorOpen : MonoBehaviour
     }
     private void Update()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, GotoState, Time.deltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, GotoState, Time.deltaTime);
         TemperatureValueSet();
     }
 
     public void ToggleState()
     {
-        doorState = (doorState + 1) % 2;
+        //doorState = (doorState + 1) % 2;
 
-        if (doorState == 0)
-            GotoState = CloseState;
-        else
-        {
-            GotoState = OpenState;
-            if(door.Temperature >= 500f)
-            {
-                Debug.Log("The Fire Goes BOOM!");
-                Instantiate(ExplosionEffect, ExplosionPoint.position, Quaternion.identity, null);
-            }
-        }
+        //if (doorState == 0)
+        //    GotoState = CloseState;
+        //else
+        //{
+        //    GotoState = OpenState;
+        //    if(door.Temperature >= 500f)
+        //    {
+        //        Debug.Log("The Fire Goes BOOM!");
+        //        Instantiate(ExplosionEffect, ExplosionPoint.position, Quaternion.identity, null);
+        //    }
+        //}
     }
 
     public void TemperatureValueSet()
