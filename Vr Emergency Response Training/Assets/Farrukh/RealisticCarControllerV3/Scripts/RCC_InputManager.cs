@@ -11,6 +11,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class RCC_InputManager : MonoBehaviour{
 
@@ -106,16 +107,18 @@ public class RCC_InputManager : MonoBehaviour{
 
 		case RCC_Settings.ControllerType.Custom:
 
-			// You can use your own inputs with Custom controller type here.
 
-//			inputs.throttleInput = "yourValue";
-//			inputs.brakeInput = "yourValue";
-//			inputs.steerInput = "yourValue";
-//			inputs.boostInput = "yourValue";
-//			inputs.clutchInput = "yourValue";
-//			inputs.handbrakeInput = "yourValue";
 
-			break;
+				// You can use your own inputs with Custom controller type here.
+				Vector3 vrInputs = CustomVRInput.instance.GetInputs();
+				inputs.throttleInput = vrInputs.x;
+				inputs.brakeInput = vrInputs.y;
+				inputs.steerInput = -vrInputs.z;
+				//			inputs.boostInput = "yourValue";
+				//			inputs.clutchInput = "yourValue";
+				//			inputs.handbrakeInput = "yourValue";
+
+				break;
 
 		}
 

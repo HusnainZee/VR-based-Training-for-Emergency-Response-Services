@@ -46,13 +46,13 @@ public class Player : MonoBehaviour
         inFumes = false;
         inFire = false;
 
-        if(Breathe)
+        if(Breathe && HudManager.instance != null)
             StartCoroutine(BreatheOxygen());
     }
 
     private void Update()
     {
-        if(HealthText != null && OxygenText != null)
+        if(HealthText != null && OxygenText != null && MaskText!=null)
         {
             HealthText.text = string.Format("{0}%", playerHealth);
             OxygenText.text = string.Format("{0}%", oxygenRemaining);

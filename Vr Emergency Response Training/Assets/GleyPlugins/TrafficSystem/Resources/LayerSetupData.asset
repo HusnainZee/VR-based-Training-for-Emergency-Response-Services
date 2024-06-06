@@ -27,4 +27,4 @@ MonoBehaviour:
     m_Bits: 131072
   playerLayers:
     serializedVersion: 2
-    m_Bits: 262144
+    m_Bits: 64
