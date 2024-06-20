@@ -59,11 +59,17 @@ public class PlayerWaypointHandler : MonoBehaviour
 
     void DisplayStats()
     {
+
+        guideArrow.gameObject.SetActive(false);
+
         float endTime = Time.time;
         float timeTaken = endTime - startTime;
 
+        MetricsManager.instance.SetMetric("Time Taken (Seconds)", timeTaken);
 
-        Stats.text = string.Format("Time Taken: {0}s\nCollsions Occured: 0", timeTaken);
+        string stats = MetricsManager.instance.GetMetricsAsString();
+
+        Stats.text = stats;
 
     }
 }

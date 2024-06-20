@@ -41,6 +41,16 @@ public class CustomVRInput : MonoBehaviour
         steeringInput = SteeringWheel.localRotation.z * 2;
         steeringInput = Mathf.Clamp(steeringInput, -1, 1);
 
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            steeringInput = -1;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            steeringInput = 1;
+        }
+
     }
 
     public Vector3 GetInputs()
