@@ -44,7 +44,7 @@ public class MetricsManager : MonoBehaviour
         {
             string metricName = metric.Key.ToString();
             string metricValue = metric.Value.ToString();
-            metricsStr += metricName += ": " + metricValue + "\n";
+            metricsStr += metricName + ": " + metricValue + "\n";
         }
 
         return metricsStr;
